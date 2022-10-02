@@ -6,10 +6,14 @@ import java.util.Scanner;
 import bean.Engineer;
 import dao.HODDao;
 import daoImpl.HODDaoImpl;
+import exceptions.ComplainException;
+import exceptions.EmployeeException;
+import exceptions.EngineerException;
+import exceptions.MyException;
 
 public class RegisterEngineerUseCase1 {
 
-	public static void main(String[] args) {
+	public static void main(String[] args) throws EngineerException, EmployeeException, MyException, ComplainException {
 		
 		Scanner s = new Scanner(System.in);
 		
@@ -35,9 +39,14 @@ public class RegisterEngineerUseCase1 {
 		engineer.setCategory(category);
 		
 		
-		String reasult = dao.registerEngineer(engineer);	
 		
-		System.out.println(reasult);
+		try {
+			String reasult = dao.registerEngineer(engineer);	
+			System.out.println(reasult);
+			HODDriver.main(args);
+		} catch (EngineerException e) {
+			e.printStackTrace();
+		}
 
 	}
 
